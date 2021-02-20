@@ -1,0 +1,6 @@
+central processing unit / CPU
+memory / RAM
+storage / SSD / Hard disk
+
+
+python interpreter

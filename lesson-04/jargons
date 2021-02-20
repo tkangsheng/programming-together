@@ -1,0 +1,9 @@
+repository / git repository := folder that is enabled with git (version control tool)
+diff (git diff)
+forking
+
+git commands:
+- commit
+- pull
+
+gitignore

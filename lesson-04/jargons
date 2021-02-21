@@ -7,3 +7,5 @@ git commands:
 - pull
 
 gitignore
+
+branch (a version of the repository with its own history. branches can be split into subbranches and merged into 1 final branch. We use branches to manage different histories and either converge them or split them.)

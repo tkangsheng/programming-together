@@ -2,13 +2,24 @@
 
 To recap the things we learned today:
 
-## 1. Operator precedence (2 + 35/7 == 2 + 15/7 == 29/7)
+# Contents
+- [Summary](#summary)
+- [Contents](#contents)
+  - [1. Operator precedence](#1-operator-precedence)
+  - [2. Variable types](#2-variable-types)
+  - [3. Getting user inputs (prompts in terminal(mac) or powershell/command-prompt (windows))](#3-getting-user-inputs-prompts-in-terminalmac-or-powershellcommand-prompt-windows)
+  - [4. Comments](#4-comments)
+  - [5. If condition](#5-if-condition)
+  - [6. Indentation defines scope](#6-indentation-defines-scope)
+  - [7. Spacebar whitespace shld be used instead of tab whitespace](#7-spacebar-whitespace-shld-be-used-instead-of-tab-whitespace)
+  - [8. Try except](#8-try-except)
 
-   1) parentheses (expressions in brackets get evaluated first)
-   2) exponentiation (2 ** 3 == 8)
-   3) multiplication, division, modulo (213/7%4 == 63/7 % 4 == 9 % 4 == 1)
-   4) addition, subtraction
-   5) left to right
+## 1. Operator precedence
+1) parentheses (expressions in brackets get evaluated first)
+2) exponentiation (2 ** 3 == 8)
+3) multiplication, division, modulo (213/7%4 == 63/7 % 4 == 9 % 4 == 1)
+4) addition, subtraction
+5) left to right
 
 ## 2. Variable types
 

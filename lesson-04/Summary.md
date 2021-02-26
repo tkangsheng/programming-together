@@ -2,6 +2,13 @@
 
 To recap the things we learned today:
 
+# Contents- [Summary](#summary)
+- [Summary](#summary)
+- [Contents- Summary](#contents--summary)
+  - [1. Github Install](#1-github-install)
+  - [2. Git Repository Fork Pull Push](#2-git-repository-fork-pull-push)
+  - [3. Python Iterations: More Patterns](#3-python-iterations-more-patterns)
+  - [4. Jargons](#4-jargons)
 ## 1. Github Install
 
 Python 3.9 (check "add python to environment variables")

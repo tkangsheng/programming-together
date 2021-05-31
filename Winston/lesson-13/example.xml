@@ -1,0 +1,6 @@
+<root>
+    Wine is better than water.
+    <someTag></someTag>
+    <tagWithoutEndTag attr_1="hello" />
+    Blood is thicker than water.
+</root>

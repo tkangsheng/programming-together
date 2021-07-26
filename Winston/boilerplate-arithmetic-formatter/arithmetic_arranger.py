@@ -1,10 +1,10 @@
 def arithmetic_arranger(problems : list, isSolved = False):
     arranged_problems = list()
 
-    left_operand_line = "" #create_with_left_operands()
-    operator_and_right_operand_line = "" #create_with_operator_and_right_operands()
-    dash_line = "" #dashes_with_padding(left, right)
-    solution_line = "" #answers_with_padding()
+    left_operand_line = [] #create_with_left_operands()
+    operator_and_right_operand_line = [] #create_with_operator_and_right_operands()
+    dash_line = [] #dashes_with_padding(left, right)
+    solution_line = [] #answers_with_padding()
 
     if there_are_too_many_problems(problems):
         return "Error: Too many problems."
@@ -22,25 +22,31 @@ def arithmetic_arranger(problems : list, isSolved = False):
             return "Error: Numbers cannot be more than four digits."
 
         problem_width = get_problem_width(left, right)
-        gap_separating_problems = "    "
 
         padded_left_operand_line = pad_left(left, problem_width)
-        left_operand_line = f"{left_operand_line}{gap_separating_problems}{padded_left_operand_line}"
+        left_operand_line.append(padded_left_operand_line)
 
-        padded_operator_and_right_operand_line = pad_left(f"{operator} {right}", problem_width)
-        operator_and_right_operand_line = f"{operator_and_right_operand_line}{gap_separating_problems}{padded_operator_and_right_operand_line}"
+        padded_operator_and_right_operand_line = ""
+        if (len(right) > len(left)):
+            padded_operator_and_right_operand_line = pad_left(f"{operator} {right}", problem_width)
+        else:
+            padded_operator_and_right_operand_line = f"{operator}{pad_left(right, problem_width - len(operator))}"
+        operator_and_right_operand_line.append(padded_operator_and_right_operand_line)
 
-        dash_line = f"{dash_line}{gap_separating_problems}{'-' * problem_width}"
+        dash_line.append('-' * problem_width)
 
         if isSolved:
             solution = evaluate(left, operator, right)
             padded_solution_line = pad_left(str(solution), problem_width)
-            solution_line = f"{solution_line}{gap_separating_problems}{padded_solution_line}"
+            solution_line.append(padded_solution_line)
 
-    arranged_problems.append(left_operand_line)
-    arranged_problems.append(operator_and_right_operand_line)
-    arranged_problems.append(dash_line)
-    arranged_problems.append(solution_line)
+    gap_separating_problems = "    "
+
+    arranged_problems.append( gap_separating_problems.join(left_operand_line) )
+    arranged_problems.append( gap_separating_problems.join(operator_and_right_operand_line) )
+    arranged_problems.append( gap_separating_problems.join(dash_line) )
+    if isSolved:
+        arranged_problems.append( gap_separating_problems.join(solution_line) )
 
     return '\n'.join(arranged_problems)
 
@@ -79,8 +85,7 @@ def evaluate(left: str, operand: str, right: str) -> str:
     else: # operand == '-'
         return left_number - right_number
 
-answer = arithmetic_arranger(["32 + 8", "1 - 3801", "9999 + 9999", "523 - 49"], True)
-print(answer)
+print(arithmetic_arranger(["3 + 855", "3801 - 2", "45 + 43", "123 + 49"], True))
 
 # (left, operator, right) = parse("32 + 698")
 # print(left)

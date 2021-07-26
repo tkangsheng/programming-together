@@ -22,7 +22,7 @@ class UnitTests(unittest.TestCase):
         actual = arithmetic_arranger(["3 / 855", "3801 - 2", "45 + 43", "123 + 49"])
         expected = "Error: Operator must be '+' or '-'."
         self.assertEqual(actual, expected, '''Expected calling "arithmetic_arranger()" with a problem that uses the "/" operator to return "Error: Operator must be '+' or '-'."''')
-        
+
     def test_too_many_digits(self):
         actual = arithmetic_arranger(["24 + 85215", "3801 - 2", "45 + 43", "123 + 49"])
         expected = "Error: Numbers cannot be more than four digits."

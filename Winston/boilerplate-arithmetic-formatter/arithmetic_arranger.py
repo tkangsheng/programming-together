@@ -28,7 +28,7 @@ def arithmetic_arranger(problems : list, isSolved = False):
 
         padded_operator_and_right_operand_line = ""
         if (len(right) > len(left)):
-            padded_operator_and_right_operand_line = pad_left(f"{operator} {right}", problem_width)
+            padded_operator_and_right_operand_line = f"{operator} {right}"
         else:
             padded_operator_and_right_operand_line = f"{operator}{pad_left(right, problem_width - len(operator))}"
         operator_and_right_operand_line.append(padded_operator_and_right_operand_line)

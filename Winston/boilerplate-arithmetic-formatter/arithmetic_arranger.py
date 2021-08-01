@@ -85,9 +85,3 @@ def evaluate(left: str, operand: str, right: str) -> str:
     else: # operand == '-'
         return left_number - right_number
 
-print(arithmetic_arranger(["3 + 855", "3801 - 2", "45 + 43", "123 + 49"], True))
-
-# (left, operator, right) = parse("32 + 698")
-# print(left)
-# print(operator)
-# print(right)

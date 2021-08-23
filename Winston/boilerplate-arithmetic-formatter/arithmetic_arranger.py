@@ -1,4 +1,4 @@
-def arithmetic_arranger(problems : list, isSolved = False):
+def arithmetic_arranger(problems : list, isSolved : bool = False) -> str:
     arranged_problems = list()
 
     left_operand_line = [] #create_with_left_operands()
@@ -37,8 +37,8 @@ def arithmetic_arranger(problems : list, isSolved = False):
 
         if isSolved:
             solution = evaluate(left, operator, right)
-            padded_solution_line = pad_left(str(solution), problem_width)
-            solution_line.append(padded_solution_line)
+            padded_solution = pad_left(str(solution), problem_width)
+            solution_line.append(padded_solution)
 
     gap_separating_problems = "    "
 
@@ -53,13 +53,13 @@ def arithmetic_arranger(problems : list, isSolved = False):
 def get_problem_width(left : str, right : str) -> int:
     return len("+ ") + max(len(left), len(right))
 
-def pad_left(solution_str : str, problem_width : int):
-    number_of_whitespaces = problem_width - len(solution_str)
+def pad_left(input_str : str, target_length : int):
+    number_of_whitespaces = target_length - len(input_str)
     white_spaces = ' ' * number_of_whitespaces
 
     # pads the left side of the solution with whitespace
-    solution_with_padding = f'{white_spaces}{solution_str}'
-    return solution_with_padding
+    padded_input_str = f'{white_spaces}{input_str}'
+    return padded_input_str
 
 def there_are_too_many_problems(problems : list):
     return len(problems) > 5
@@ -77,11 +77,12 @@ def parse(problem : str):
     right = symbols[2]
     return (left, operator, right)
 
-def evaluate(left: str, operand: str, right: str) -> str:
+def evaluate(left: str, operator: str, right: str) -> int:
     left_number = int(left)
     right_number = int(right)
-    if operand == '+':
+    if operator == '+':
         return left_number + right_number
     else: # operand == '-'
         return left_number - right_number
 
+arithmetic_arranger(["32 + 8", "1 - 3801", "9999 + 9999", "523 - 49"], True)

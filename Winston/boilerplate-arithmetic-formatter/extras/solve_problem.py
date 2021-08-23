@@ -1,0 +1,1 @@
+print(str.join('a','b'))

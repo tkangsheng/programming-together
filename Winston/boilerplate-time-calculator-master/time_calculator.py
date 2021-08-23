@@ -16,7 +16,7 @@ def add_time(start, duration):
 # starting minutes + duration minutes = new_time minutes
 # then convert back.
 # new_time minutes / (number of minutes in 1 day) = number of days R (minutes after 12AM on the last day)
-
+# minutes after 12AM / (number of minutes in 1 hour) = number of hours after 12AM R (number of minutes after that hour)
     return new_time
 
 result = add_time("3:00 PM", "3:10")

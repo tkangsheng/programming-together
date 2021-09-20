@@ -1,4 +1,4 @@
-def add_time(start, duration, day_of_the_week = None):
+def add_time(start : str, duration : str, day_of_the_week = None):
     new_time = ''
 
 # split the start time into 3 parts. hours, mins, AM/PM
@@ -75,15 +75,15 @@ def convert_hour_min_to_minutes(hour_min) -> int:
     minutes = minutes + hours*60
     return minutes
 
-def add_days(weekday, days_to_add):
+def add_days(weekday : str, days_to_add : int):
     weekday = weekday.lower()
-    weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     weekday = f'{weekday[0].upper()}{weekday[1:].lower()}'
-    weekday_number = weekdays.index(weekday) + days_to_add
-    new_weekday = weekdays[weekday_number % len(weekdays)]
+    weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    new_weekday_index = (weekdays.index(weekday) + days_to_add) % len(weekdays)
+    new_weekday = weekdays[new_weekday_index]
     return new_weekday
 
-print(add_time("3:00 PM", "3:10"))
+print(add_time("8:18 PM", "100:00"))
 # Returns: 6:10 PM
 
 print(add_time("11:30 AM", "2:32", "Monday"))

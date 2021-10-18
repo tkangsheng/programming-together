@@ -1,29 +1,14 @@
+MINUTES_PER_HOUR = 60
+MINUTES_PER_DAY = 24 * MINUTES_PER_HOUR
+
 def add_time(start : str, duration : str, day_of_the_week = None):
     new_time = ''
 
-# split the start time into 3 parts. hours, mins, AM/PM
-# confirm if minutes portion is < 60
-# add duration's minutes to start time.
-# convert 24 hrs into 1 day.
-# convert 60 mins into 1 hour.
-
-# after 11:59 AM -> 12:00 PM
-# 11:59 PM -> 12:00 AM
-
-# convert (start time) AM/PM to total minutes since 12:00AM
     start_minutes = convert_AM_PM_to_minutes(start)
-# convert duration into total minutes
     duration_minutes = convert_hour_min_to_minutes(duration)
-# add the duration to the total minutes since 12AM (start time)
     end_minutes = start_minutes + duration_minutes
-# starting minutes + duration minutes = new_time minutes
-# count the number of + days. subtract the minutes * minutes per day
-    MINUTES_PER_HOUR = 60
-    MINUTES_PER_DAY = 24 * MINUTES_PER_HOUR
+
     days_past = end_minutes // MINUTES_PER_DAY
-# then convert back.
-# new_time minutes / (number of minutes in 1 day) = number of days R (minutes after 12AM on the last day)
-# minutes after 12AM / (number of minutes in 1 hour) = number of hours after 12AM R (number of minutes after that hour)
     new_time_minutes_past_midnight = end_minutes % MINUTES_PER_DAY
     new_time_hours = new_time_minutes_past_midnight // MINUTES_PER_HOUR
 
@@ -76,17 +61,16 @@ def convert_hour_min_to_minutes(hour_min) -> int:
     return minutes
 
 def add_days(weekday : str, days_to_add : int):
-    weekday = weekday.lower()
-    weekday = f'{weekday[0].upper()}{weekday[1:].lower()}'
-    weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    weekday = weekday.capitalize()
+    weekdays = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     new_weekday_index = (weekdays.index(weekday) + days_to_add) % len(weekdays)
     new_weekday = weekdays[new_weekday_index]
     return new_weekday
 
-print(add_time("8:18 PM", "100:00"))
+print(add_time("3:00 PM", "3:10"))
 # Returns: 6:10 PM
 
-print(add_time("11:30 AM", "2:32", "Monday"))
+print(add_time("11:30 AM", "2:32", "moNDay"))
 # Returns: 2:02 PM, Monday
 
 print(add_time("11:43 AM", "00:20"))
@@ -100,3 +84,5 @@ print(add_time("11:43 PM", "24:20", "tueSday"))
 
 print(add_time("6:30 PM", "205:12"))
 # Returns: 7:42 AM (9 days later)
+
+print(add_time("7:30 PM", "18:00"))

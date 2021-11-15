@@ -57,10 +57,10 @@ def create_spend_chart(categories):
     return
 
 
-money = Category("Food")
-title_bar = money.title_bar()
-print(title_bar)
-print(len(title_bar))
+food = Category("Food")
+title_bar = food.title_bar()
+print(food)
+
 # a = Category("food")
 # a.deposit(100)
 # successful = a.withdraw(23.4)

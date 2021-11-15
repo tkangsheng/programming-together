@@ -4,24 +4,21 @@ MINUTES_PER_DAY = 24 * MINUTES_PER_HOUR
 def add_time(start : str, duration : str, day_of_the_week = None):
     new_time = ''
 
-    start_minutes = convert_AM_PM_to_minutes(start)
+    minutes_past_start_midnight = convert_AM_PM_to_minutes(start)
     duration_minutes = convert_hour_min_to_minutes(duration)
-    end_minutes = start_minutes + duration_minutes
+    end_minutes_past_start_midnight = minutes_past_start_midnight + duration_minutes
 
-    days_past = end_minutes // MINUTES_PER_DAY
-    new_time_minutes_past_midnight = end_minutes % MINUTES_PER_DAY
-    new_time_hours = new_time_minutes_past_midnight // MINUTES_PER_HOUR
+    days_past = end_minutes_past_start_midnight // MINUTES_PER_DAY
+    end_minutes_past_start_midnight = end_minutes_past_start_midnight % MINUTES_PER_DAY
+    end_hours = end_minutes_past_start_midnight // MINUTES_PER_HOUR
+    if end_hours == 0:
+        end_hours = 12
+    elif end_hours > 12:
+        end_hours = end_hours - 12
 
-    am_pm = 'AM'
-    if new_time_hours >= 12:
-        am_pm = 'PM'
+    am_pm = 'AM' if end_hours < 12 else 'PM'
 
-    if new_time_hours == 0:
-        new_time_hours = 12
-    elif new_time_hours > 12:
-        new_time_hours = new_time_hours - 12
-
-    new_time_minutes = new_time_minutes_past_midnight % MINUTES_PER_HOUR
+    end_minutes = end_minutes_past_start_midnight % MINUTES_PER_HOUR
 
     weekday_text = ''
     if day_of_the_week is not None:
@@ -35,9 +32,9 @@ def add_time(start : str, duration : str, day_of_the_week = None):
     elif days_past > 1:
         days_past_text = f' ({days_past} days later)'
 
-    if new_time_minutes < 10:
-        new_time_minutes = f'0{new_time_minutes}'
-    new_time = f'{new_time_hours}:{new_time_minutes} {am_pm}{weekday_text}{days_past_text}'
+    if end_minutes < 10:
+        end_minutes = f'0{end_minutes}'
+    new_time = f'{end_hours}:{end_minutes} {am_pm}{weekday_text}{days_past_text}'
 
     return new_time
 

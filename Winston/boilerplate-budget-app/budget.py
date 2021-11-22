@@ -26,7 +26,7 @@ class Category:
             return True
         return False
 
-    def get_balance(self):
+    def get_balance(self) -> float:
         return self.currentAmount
 
     def transfer(self, amount : float, another_category):
@@ -59,7 +59,7 @@ class Category:
             lines_of_ledger.append(f'{description}{whitespaces}{amount}')
         return '\n'.join(lines_of_ledger)
 
-    def total_amount(self):
+    def total_amount(self) -> str:
         formatted_amount = '%.2f' % self.currentAmount
         return f'Total: {formatted_amount}'
 
@@ -89,4 +89,72 @@ food.deposit(-12, 'Chicken McNuggets x20')
 
 categories = [clothing, gaming, food]
 
-create_spend_chart(categories)
+print('part A answer:')
+print(food)
+
+spend_chart = create_spend_chart(categories)
+
+print('part B answer:')
+
+
+entertainment = Category('entertainment')
+entertainment.deposit(12, "avengers-movie")
+
+food = Category('food')
+food.deposit(12, 'chicken')
+food.deposit(6.4, 'fish')
+food.deposit(7.5, 'nugget')
+food.deposit(-5, 'ntuc-voucher')
+
+categories = [food, entertainment]
+border = ' '*4 + '-'*(len(categories)*3 + 1)
+
+
+
+MAX_PERCENT = 100
+PERCENT_DENOMINATION = 10
+
+def format_percent(percent: int) -> str:
+    whitespace_count = len(str(MAX_PERCENT)) - len(str(percent))
+    whitespace = ' ' * whitespace_count
+    return f'{whitespace}{percent}| '
+
+def calculate_total_balance(categories: list[Category]) -> float:
+    total_balance = 0
+    for category in categories:
+        withdrawal = get_withdrawal_total(category)
+        total_balance += withdrawal
+    return total_balance
+
+def get_withdrawal_total(category: Category) -> float:
+    withdrawal_total = 0
+    for item in category.ledger:
+        amount = item['amount']
+        if amount < 0: # withdrawal
+            withdrawal_total += -amount
+    return withdrawal_total
+
+def create_dots(category: Category, total_balance: float, chart_percent: int) -> str:
+    category_balance = get_withdrawal_total(category)
+    category_percent = (category_balance / total_balance) * 100
+    if category_percent >= chart_percent:
+        return 'o  '
+    else:
+        return '   '
+
+
+
+chart_percent = MAX_PERCENT
+total_balance = calculate_total_balance(categories)
+for i in range(11):
+    percent_label = format_percent(chart_percent)
+    all_category_dots = []
+    for category in categories:
+        category_dots = create_dots(category, total_balance, chart_percent)
+        all_category_dots.append(category_dots)
+    percent_line = f'{percent_label}{"".join(all_category_dots)}'
+    print(percent_line)
+    chart_percent -= PERCENT_DENOMINATION
+
+print(border)
+

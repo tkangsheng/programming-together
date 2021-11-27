@@ -143,7 +143,7 @@ def create_spend_chart(categories: list[Category]):
     # calculate percentages
     # calculate width of the chart
     # calculate height of the chart
-
+    END_OF_LINE = '\n'
     y_label_size = len('100|')
     chart_percent = MAX_PERCENT
     total_balance = calculate_total_balance(categories)
@@ -170,13 +170,12 @@ def create_spend_chart(categories: list[Category]):
     for letter_index in range(get_max_title_length(categories)):
         all_categories_letter_in_this_index : list[str] = []
         for category in categories:
-            if letter_index < len(category.title):
-                category_title_letter = category.title[letter_index]
-                letter_block = category_title_letter + ' '*2
-                all_categories_letter_in_this_index.append(letter_block)
+            category_title_letter = category.title[letter_index] if letter_index < len(category.title) else ' '
+            letter_block = category_title_letter + ' '*2
+            all_categories_letter_in_this_index.append(letter_block)
         line = ' ' * (y_label_size + 1) + "".join(all_categories_letter_in_this_index)
         all_lines.append(line)
-    return '\n'.join(all_lines)
+    return END_OF_LINE.join(all_lines)
 
 
 print('part B answer:')

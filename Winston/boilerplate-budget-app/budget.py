@@ -143,12 +143,13 @@ def create_spend_chart(categories: list[Category]):
     # calculate percentages
     # calculate width of the chart
     # calculate height of the chart
+    HEADER = 'Percentage spent by category'
     END_OF_LINE = '\n'
     y_label_size = len('100|')
     chart_percent = MAX_PERCENT
     total_balance = calculate_total_balance(categories)
     size_of_categories = len(categories)
-    all_lines = []
+    all_lines = [ HEADER ]
 
     # create percent lines
     for i in range(11):

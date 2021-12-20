@@ -90,7 +90,8 @@ food.withdraw(12, 'Chicken McNuggets x20')
 categories = [clothing, gaming, food]
 
 print('part A answer:')
-print(food)
+for category in categories:
+    print(category)
 
 
 def format_percent(percent: int) -> str:

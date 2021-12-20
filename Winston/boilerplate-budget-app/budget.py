@@ -1,13 +1,11 @@
-from typing import final
-
 MAX_PERCENT = 100
 PERCENT_DENOMINATION = 10
 
 class Category:
     WIDTH_OF_LEDGER = 30
 
-    def __init__(self, title: str) -> None:
-        self.title = title
+    def __init__(self, title: str):
+        self.title: str = title
         self.currentAmount: float = 0
         self.ledger: list = []
 
@@ -18,7 +16,7 @@ class Category:
         })
         self.currentAmount += amount
 
-    def withdraw(self, amount: float, description: str = ''):
+    def withdraw(self, amount: float, description: str = '') -> bool:
         if self.check_funds(amount):
             self.ledger.append({
                 "amount": -amount,
@@ -31,19 +29,19 @@ class Category:
     def get_balance(self) -> float:
         return self.currentAmount
 
-    def transfer(self, amount: float, another_category):
+    def transfer(self, amount: float, another_category) -> bool:
         if self.withdraw(amount, f'Transfer to {another_category.title}'):
             another_category.deposit(amount, f"Transfer from {self.title}")
             return True
         return False
 
-    def check_funds(self, amount):
+    def check_funds(self, amount) -> bool:
         return amount <= self.currentAmount
 
     def __str__(self) -> str:
         return f'{self.title_bar()}\n{self.items_in_ledger()}\n{self.total_amount()}'
 
-    def title_bar(self):
+    def title_bar(self) -> str:
         if len(self.title) % 2 == 0:
             return '*'*self.number_of_stars() + self.title + '*'*self.number_of_stars()
         else:
@@ -52,7 +50,7 @@ class Category:
     def number_of_stars(self) -> int:
         return (Category.WIDTH_OF_LEDGER - len(self.title)) // 2
 
-    def items_in_ledger(self):
+    def items_in_ledger(self) -> str:
         lines_of_ledger = []
         for item in self.ledger:
             description = item["description"][:23]
@@ -65,34 +63,6 @@ class Category:
     def total_amount(self) -> str:
         formatted_amount = '%.2f' % self.currentAmount
         return f'Total: {formatted_amount}'
-
-
-
-
-clothing = Category("Clothing")
-clothing.deposit(232, 'Adidas Ultraboost')
-clothing.deposit(30, 'Couple T-shirt')
-clothing.withdraw(1, 't-shirt')
-
-gaming = Category('Gaming')
-gaming.deposit(300, 'Maplestory Credits')
-gaming.withdraw(10, 'Maplestory Credits')
-
-food = Category("Food")
-title_bar = food.title_bar()
-food.deposit(12, 'Chicken McNuggets x20')
-food.deposit(12, 'Chicken McNuggets x20')
-food.deposit(12, 'Chicken McNuggets x20')
-food.deposit(12, 'Chicken McNuggets x20')
-food.deposit(12, 'Chicken McNuggets x20')
-food.withdraw(12, 'Chicken McNuggets x20')
-
-categories = [clothing, gaming, food]
-
-print('part A answer:')
-for category in categories:
-    print(category)
-
 
 def format_percent(percent: int) -> str:
     whitespace_count = len(str(MAX_PERCENT)) - len(str(percent))
@@ -138,8 +108,6 @@ def get_max_title_length(categories: list[Category]) -> int:
 
     return max_length
 
-
-
 def create_spend_chart(categories: list[Category]):
     # calculate percentages
     # calculate width of the chart
@@ -179,6 +147,3 @@ def create_spend_chart(categories: list[Category]):
         all_lines.append(line)
     return END_OF_LINE.join(all_lines)
 
-
-print('part B answer:')
-print(create_spend_chart(categories))

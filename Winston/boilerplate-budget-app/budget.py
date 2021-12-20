@@ -69,14 +69,12 @@ def format_percent(percent: int) -> str:
     whitespace = ' ' * whitespace_count
     return f'{whitespace}{percent}| '
 
-
 def calculate_total_balance(categories: list[Category]) -> float:
     total_balance = 0
     for category in categories:
         withdrawal = get_withdrawal_total(category)
         total_balance += withdrawal
     return total_balance
-
 
 def get_withdrawal_total(category: Category) -> float:
     withdrawal_total = 0
@@ -85,7 +83,6 @@ def get_withdrawal_total(category: Category) -> float:
         if amount < 0:  # withdrawal
             withdrawal_total += -amount
     return withdrawal_total
-
 
 def create_dots(category: Category, size_of_categories: int, total_balance: float, chart_percent: int) -> str:
     category_balance = get_withdrawal_total(category)
@@ -114,14 +111,14 @@ def create_spend_chart(categories: list[Category]):
     # calculate height of the chart
     HEADER = 'Percentage spent by category'
     END_OF_LINE = '\n'
-    y_label_size = len('100|')
+    Y_LABEL_SIZE = 4 # len('100|')
     chart_percent = MAX_PERCENT
     total_balance = calculate_total_balance(categories)
     size_of_categories = len(categories)
     all_lines = [ HEADER ]
 
     # create percent lines
-    for i in range(11):
+    while chart_percent >= 0:
         percent_label = format_percent(chart_percent)
 
         all_category_dots = []
@@ -133,17 +130,22 @@ def create_spend_chart(categories: list[Category]):
         chart_percent -= PERCENT_DENOMINATION
 
     # create border
-    border = ' ' * y_label_size + '-'*(len(categories)*3 + 1)
+    border = ' ' * Y_LABEL_SIZE + '-'*(len(categories)*3 + 1)
     all_lines.append(border)
 
     # create category label lines
-    for letter_index in range(get_max_title_length(categories)):
+    size_of_the_longest_title = get_max_title_length(categories)
+    for letter_index in range(size_of_the_longest_title):
         all_categories_letter_in_this_index : list[str] = []
         for category in categories:
-            category_title_letter = category.title[letter_index] if letter_index < len(category.title) else ' '
+            category_title_letter : str
+            if letter_index < len(category.title):
+                category_title_letter = category.title[letter_index]
+            else:
+                category_title_letter = ' '
             letter_block = category_title_letter + ' '*2
             all_categories_letter_in_this_index.append(letter_block)
-        line = ' ' * (y_label_size + 1) + "".join(all_categories_letter_in_this_index)
+        line = ' ' * (Y_LABEL_SIZE + 1) + "".join(all_categories_letter_in_this_index)
         all_lines.append(line)
     return END_OF_LINE.join(all_lines)
 

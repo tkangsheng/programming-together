@@ -1,7 +1,7 @@
 class Rectangle:
-    width : float
-    height : float
-    def __init__(self, width : float, height : float) -> None:
+    width: float
+    height: float
+    def __init__(self, width: float, height: float) -> None:
         self.width = width
         self.height = height
 
@@ -9,20 +9,20 @@ class Rectangle:
     def __str__(self) -> str:
         return f'Rectangle(width={self.width}, height={self.height})'
 
-    def set_width(self):
-        raise NotImplementedError
+    def set_width(self, width: float):
+        self.width = width
 
-    def set_height(self):
-        raise NotImplementedError
+    def set_height(self, height: float):
+        self.height = height
 
     def get_area(self):
-        raise NotImplementedError
+        return self.width * self.height
 
     def get_perimeter(self):
-        raise NotImplementedError
+        return 2 * self.width + 2 * self.height
 
     def get_diagonal(self):
-        raise NotImplementedError
+        return (self.width ** 2 + self.height ** 2) ** .5
 
     def get_picture(self):
         raise NotImplementedError
@@ -37,7 +37,7 @@ class Square(Rectangle):
     def set_side(self):
         raise NotImplementedError
 
-a = Rectangle(3, 4)
-b = Rectangle(5, 6)
-print(a)
-print(b)
+shapeA = Rectangle(3, 4)
+shapeB = Rectangle(5, 6)
+print(shapeA)
+print(shapeB)

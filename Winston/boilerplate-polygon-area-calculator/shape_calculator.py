@@ -51,8 +51,9 @@ class Square(Rectangle):
     def __init__(self, side: float) -> None:
         super().__init__(side, side)
 
-    def set_side(self):
-        raise NotImplementedError
+    def set_side(self, side: float) -> None:
+        self.width = side
+        self.height = side
 
 shapeA = Rectangle(3, 4)
 shapeB = Rectangle(5, 6)

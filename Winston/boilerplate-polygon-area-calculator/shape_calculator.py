@@ -25,9 +25,26 @@ class Rectangle:
         return (self.width ** 2 + self.height ** 2) ** .5
 
     def get_picture(self):
-        raise NotImplementedError
+        SIZE_LIMIT = 50
+        if (self.height > SIZE_LIMIT or self.width > SIZE_LIMIT):
+            print("Too big for picture.")
 
-    def get_amount_inside(self):
+        lines = []
+        for i in range(self.height):
+            lines.append('*'*self.width)
+        return '\n'.join(lines)
+
+    def get_amount_inside(self, otherRectangle):
+        # what's a quick way to determine if a rectangle can fit inside another rectangle?
+        # what are the different cases for fitting 1 rectangle into another?
+        # case 1:
+        # the width and height of otherRectangle is bigger than self -> 0
+        # case 2:
+        # the width of otherRectangle is bigger than self.width -> 0
+        # case 3:
+        # the height of otherRectangle is bigger than self.height -> 0
+        # case 4:
+        # the width and height are both within self.width. then otherRectangle.width * N == self.width. and otherRectangle.height * M == self.height where N is the number of otherRectangle u can fit side-to-side in self, and M is the number of otherRectangle u can fit on top of each other in self.
         raise NotImplementedError
 
 class Square(Rectangle):
@@ -41,3 +58,5 @@ shapeA = Rectangle(3, 4)
 shapeB = Rectangle(5, 6)
 print(shapeA)
 print(shapeB)
+picture = shapeA.get_picture()
+print(picture)

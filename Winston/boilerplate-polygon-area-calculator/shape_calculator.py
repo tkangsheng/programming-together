@@ -27,7 +27,7 @@ class Rectangle:
     def get_picture(self):
         SIZE_LIMIT = 50
         if (self.height > SIZE_LIMIT or self.width > SIZE_LIMIT):
-            print("Too big for picture.")
+            return "Too big for picture."
 
         lines = []
         for i in range(self.height):
@@ -55,9 +55,5 @@ class Square(Rectangle):
         self.width = side
         self.height = side
 
-shapeA = Rectangle(3, 4)
-shapeB = Rectangle(5, 6)
-print(shapeA)
-print(shapeB)
-picture = shapeA.get_picture()
-print(picture)
+mySquare = Square(4)
+print(mySquare)
